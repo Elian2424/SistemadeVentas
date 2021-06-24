@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SistemaVentas.Models.Producto>
+
+@{ ViewData["Title"] = "Index2"; }
+
+
+
+<h4>Consulta de  Productos</h4>
+<p>
+    <a asp-action="Create" class="btn btn-success">Registrar Nuevo Producto</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombre)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Precio)
+    </td>
+
+    <td>
+        <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-info">Editar</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+    </td>
+</tr>}
+    </tbody>
+</table>

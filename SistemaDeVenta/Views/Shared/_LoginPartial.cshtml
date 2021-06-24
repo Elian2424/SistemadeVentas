@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+<li class="nav-item">
+
+    <a class="nav-link text-dark" asp-area="" asp-controller="MProducto" asp-action="Carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="6" cy="19" r="2" />
+            <circle cx="17" cy="19" r="2" />
+            <path d="M17 17h-11v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+        </svg>
+    </a>
+</li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hola! @User.Identity.Name!</a>
+                </li>
+                                <li class="nav-item">
+
+                                    <div class="accordion" id="accordionExample">
+                                        <button class="nav-link btn btn-link text-dark" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Salir
+                                        </button>
+                                        <div id="collapseOne" class="collapse hide"
+                                             data-parent="#accordionExample" style="position:absolute; background-color: white;">
+                                            <div class="fast_confirm" top: -15.5px; left: 843.219px; z-index: 10000;">
+                                                <div style="top:0px; margin-right:0px;">
+
+                                                </div>
+                                                <div class="fast_confirm_arrow_border fast_confirm_right" style="top: 26.5px;">
+                                                </div>
+                                                <div class="fast_confirm_arrow fast_confirm_right" style="top: 28.5px;">
+                                                </div>Esta seguro de Cerrar Sesión?
+                                                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Comprar", "MProducto", new { area = "" })">
+                                                    <br />
+                                                    <input type="submit" class="btn btn-danger" value="Si">
+                                                    <button asp-action="Comprar" class="btn btn-primary" icon type="button" data-toggle="collapse"
+                                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        No
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+                                </li>
+ }
+                            else
+                            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrar</a>
+                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Inciar Sesion</a>
+                                </li>
+}
+</ul>

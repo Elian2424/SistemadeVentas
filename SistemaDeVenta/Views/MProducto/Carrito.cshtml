@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<SistemaVentas.Models.Carrito>
+@{ ViewData["Title"] = "Carrito";
+
+
+
+                decimal monto = 0;
+                decimal total = 0;
+                foreach (var item in Model)
+                {
+
+
+
+                    monto = item.Monto;
+                    total += monto;
+
+                } }
+
+
+
+
+<p>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="72" height="72" viewBox="0 0 24 24" stroke-width="1" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <circle cx="6" cy="19" r="2" />
+        <circle cx="17" cy="19" r="2" />
+        <path d="M17 17h-11v-14h-2" />
+        <path d="M6 5l14 1l-1 7h-13" />
+    </svg>
+    @if (total < 1)
+    {
+<form asp-action="Comprar">
+    <div style="display:inline-block;">
+
+        <h3>Total: $@total</h3>
+        <button asp-action="Comprar" class="btn btn-success" disabled>Comprar</button>
+    </div>
+
+</form> }
+            else
+            {
+<h3>Total: RD $@total</h3>
+                <a asp-action="Comprar" class="btn btn-success">Comprar</a>}
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Producto
+            </th>
+
+            <th>
+                Descripcion
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Monto
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+<tr>
+    <td>
+
+        @item.Nombre
+    </td>
+
+    <td>
+        @item.Descripcion
+    </td>
+    <td>
+        @item.Cantidad
+    </td>
+    <td>
+        @item.Monto
+    </td>
+
+    <td>
+        <a asp-action="DeleteC" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+    </td>
+</tr>}
+    </tbody>
+</table>
